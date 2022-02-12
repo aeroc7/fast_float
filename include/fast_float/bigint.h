@@ -99,7 +99,7 @@ struct stackvec {
   // add items to the vector, from a span, without bounds checking
   void extend_unchecked(limb_span s) noexcept {
     limb* ptr = data + length;
-    ::memcpy((void*)ptr, (const void*)s.ptr, sizeof(limb) * s.len());
+    ::memcpy(static_cast<void*>(ptr), static_cast<const void*>(s.ptr), sizeof(limb) * s.len());
     set_len(len() + s.len());
   }
   // try to add items to the vector, returning if items were added

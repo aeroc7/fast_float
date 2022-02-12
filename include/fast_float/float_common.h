@@ -191,7 +191,7 @@ fastfloat_really_inline value128 full_multiplication(uint64_t a,
 #elif defined(FASTFLOAT_32BIT) || (defined(_WIN64) && !defined(__clang__))
   answer.low = _umul128(a, b, &answer.high); // _umul128 not available on ARM64
 #elif defined(FASTFLOAT_64BIT)
-  __uint128_t r = ((__uint128_t)a) * b;
+  __uint128_t r = (static_cast<__uint128_t>(a)) * b;
   answer.low = uint64_t(r);
   answer.high = uint64_t(r >> 64);
 #else
